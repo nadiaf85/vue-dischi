@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <main class="container-fluid">
         <div class="row">
             <div class="col">
                 <ListaCd/>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ListaCd from "../sections/ListaCd.vue"
+import ListaCd from "../commons/sections/ListaCd.vue"
 
 export default {
     name: 'Main',
@@ -21,5 +21,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+main{
+    background-color: #2c2c50;
+    padding: 60px;
+}
 
 </style>

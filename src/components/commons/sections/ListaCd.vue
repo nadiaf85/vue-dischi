@@ -1,26 +1,30 @@
 <template>
   <section class="container">
-      <div v-if="!loading" class="row">
-        <Locandina v-for="locandina in locandinaArray" :key="locandina.id" :info="locandina"
-            class="col-12 col-sm-6 col-lg-3" />
+      <div div v-if="!loading" class="row">
+        <Locandina v-for="(locandina,index) in locandinaArray" :key="index" :info="locandina"
+            class="col-2" />
         </div>
+        <Loader v-else />
   </section>
 </template>
 
 <script>
 import axios from "axios";
-import Locandina from "../commons/Locandina.vue";
+import Locandina from "../Locandina.vue";
+import Loader from "../Loader.vue";
 
 export default {
-    name: ListaCd,
+    name: 'ListaCd',
     data (){
         return{
             apiURL: "https://flynn.boolean.careers/exercises/api/array/music",
-            locandinaArray: []
+            locandinaArray: [],
+            loading: true
         }
     },
     components: {
         Locandina,
+        Loader
     },
     created(){
         this.getLocandina();
@@ -32,7 +36,7 @@ export default {
                 .then( (risposta) => {
                     // handle success
                     this.locandinaArray = risposta.data.response;
-                    // this.loading = false;
+                    this.loading = false;
                 })
                 .catch(function (error) {
                     // handle error
@@ -44,6 +48,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.container{
+    width: 80%;
+}
 
 </style>
