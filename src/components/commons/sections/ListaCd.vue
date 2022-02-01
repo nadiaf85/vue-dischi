@@ -1,7 +1,8 @@
 <template>
   <section class="container">
       <div div v-if="!loading" class="row">
-        <Locandina v-for="(locandina,index) in locandinaArray" :key="index" :info="locandina"
+        <div class="genere">Scegli un genere <Select @filtra="getGenere"/></div>
+        <Locandina v-for="(locandina,index) in cdFiltrati" :key="index" :info="locandina"
             class="col-2" />
         </div>
         <Loader v-else />
@@ -12,6 +13,8 @@
 import axios from "axios";
 import Locandina from "../Locandina.vue";
 import Loader from "../Loader.vue";
+import Select from "../Select.vue";
+
 
 export default {
     name: 'ListaCd',
@@ -19,15 +22,24 @@ export default {
         return{
             apiURL: "https://flynn.boolean.careers/exercises/api/array/music",
             locandinaArray: [],
-            loading: true
+            loading: true,
+            genereSelezionato: ""
         }
     },
     components: {
         Locandina,
-        Loader
+        Loader,
+        Select
     },
     created(){
         this.getLocandina();
+    },
+    computed:{
+        cdFiltrati(){
+            return this.locandinaArray.filter((locandina) =>{
+                return locandina.genre.includes(this.genereSelezionato)
+            });
+        }
     },
     methods: {
         getLocandina(){
@@ -42,6 +54,11 @@ export default {
                     // handle error
                     console.log(error);
                 });
+        },
+        getGenere(genere)
+        {
+            this.genereSelezionato = genere;
+            console.log(this.genereSelezionato);
         }
     }
 
@@ -52,6 +69,12 @@ export default {
 
 .container{
     width: 80%;
+}
+
+.genere{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 </style>

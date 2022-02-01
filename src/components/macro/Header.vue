@@ -1,6 +1,6 @@
 <template>
     <header>
-        <img src="../../assets/img/spotify_logo.png" alt="">        
+        <img src="../../assets/img/spotify_logo.png" alt="">
     </header>
   
 </template>
@@ -18,11 +18,14 @@ export default {
 header{
     background: $secondColor;
     padding: 5px 10px;
+    display: flex;
+    align-items: center;
 
         img{
             height: 50px;
             width: 50px;
-}
+            margin-right: 30px
+        }
 }
 
 </style>
